@@ -7,11 +7,14 @@ Next.js web app for the BookLeaf Author Support & Communication Portal. It conta
 
 | | |
 |---|---|
-| **Live demo** | _add your deployed URL here_ |
+| **Live demo** | https://book-leaf-assignment-frontend.vercel.app |
+| **Live API** | https://api-assignments.muzammil.live · [Swagger docs](https://api-assignments.muzammil.live/api/docs) |
 | **Backend / API** | [`bookLeaf_assignment_backend`](https://github.com/mozxmmil/bookLeaf_assignment_backend) |
 | **Stack** | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS 4 |
 
 ### Test credentials
+
+Sign in on the live demo with any of these:
 
 | Role | Email | Password |
 |---|---|---|
@@ -55,7 +58,7 @@ src/
 ## Deploy on Vercel
 
 1. Import this repo in Vercel. The framework (Next.js) is detected automatically; leave the root directory as is.
-2. Add the environment variable `NEXT_PUBLIC_API_URL=https://api.yourdomain.com` (your backend's HTTPS URL).
+2. Add the environment variable `NEXT_PUBLIC_API_URL=https://api-assignments.muzammil.live` (your backend's HTTPS URL).
 3. Deploy. `NEXT_PUBLIC_*` values are built into the bundle, so **redeploy** after changing one.
 4. Set the backend's `CLIENT_ORIGIN` to this Vercel URL exactly, or the browser will block requests (CORS).
 

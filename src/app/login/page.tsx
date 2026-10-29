@@ -5,12 +5,6 @@ import { homeFor, useAuth } from '@/lib/auth';
 import { ApiError } from '@/lib/api';
 import { Spinner } from '@/components/ui';
 
-const DEMO = [
-  { label: 'Author — Priya Sharma', email: 'priya.sharma@example.com', password: 'author123' },
-  { label: 'Author — Michael Carter (book in production)', email: 'michael.carter@example.com', password: 'author123' },
-  { label: 'Admin — Support Lead', email: 'admin@bookleaf.com', password: 'admin123' },
-];
-
 function LoginForm() {
   const { login, user, loading } = useAuth();
   const router = useRouter();
@@ -55,18 +49,6 @@ function LoginForm() {
             {submitting && <Spinner className="h-4 w-4 text-white" />} Sign in
           </button>
         </form>
-        <div className="card mt-4 p-4">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Demo accounts</p>
-          <div className="space-y-1">
-            {DEMO.map((d) => (
-              <button key={d.email} type="button" onClick={() => { setEmail(d.email); setPassword(d.password); }}
-                className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-left text-sm hover:bg-slate-50">
-                <span className="text-slate-700">{d.label}</span><span className="text-xs text-slate-400">Use →</span>
-              </button>
-            ))}
-          </div>
-          <p className="mt-2 text-xs text-slate-400">All authors in the sample dataset use password <code>author123</code>.</p>
-        </div>
       </div>
     </div>
   );
