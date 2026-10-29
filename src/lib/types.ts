@@ -9,6 +9,7 @@ export interface Book {
   id: string; title: string; isbn: string | null; genre: string | null; publicationDate: string | null;
   status: string; isPublished: boolean; mrp: number; copiesSold: number;
   royaltyEarned: number; royaltyPaid: number; royaltyPending: number; belowPayoutThreshold: boolean;
+  royaltyPerCopy: number | null; lastPayoutDate: string | null; printPartner: string | null; availableOn: string[];
 }
 export interface BookTotals { copiesSold: number; royaltyEarned: number; royaltyPaid: number; royaltyPending: number }
 

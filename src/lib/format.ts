@@ -30,7 +30,8 @@ export const CATEGORY_LABEL: Record<Category, string> = {
 };
 
 export const PRODUCTION_STAGES = ['Manuscript Received', 'Editing', 'Cover Design', 'Typesetting', 'Proofreading', 'ISBN Assignment', 'Printing', 'Distribution Setup', 'Published & Live'];
+/** Works for a bare stage ("Typesetting") and the dataset's form ("In Production - Typesetting"). */
 export function stageIndex(status: string) {
-  const i = PRODUCTION_STAGES.findIndex((s) => s.toLowerCase() === status.toLowerCase());
+  const i = PRODUCTION_STAGES.findIndex((s) => status.toLowerCase().includes(s.toLowerCase()));
   return i >= 0 ? i : /published|live/i.test(status) ? PRODUCTION_STAGES.length - 1 : -1;
 }

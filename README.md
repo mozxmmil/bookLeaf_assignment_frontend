@@ -19,8 +19,8 @@ Sign in on the live demo with any of these:
 | Role | Email | Password |
 |---|---|---|
 | Admin | `admin@bookleaf.com` | `admin123` |
-| Author (2 published books) | `priya.sharma@example.com` | `author123` |
-| Author (one book in production) | `michael.carter@example.com` | `author123` |
+| Author (2 published books) | `priya.sharma@email.com` | `author123` |
+| Author (one book in production, one under the ₹1,000 payout minimum) | `kavita.deshmukh@email.com` | `author123` |
 
 ## Run locally
 

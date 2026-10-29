@@ -52,7 +52,8 @@ function BookCard({ book: b }: { book: Book }) {
         <div>
           <h2 className="text-lg font-semibold text-slate-900">{b.title}</h2>
           <p className="mt-0.5 text-sm text-slate-500">
-            {b.genre ?? '—'} · ISBN {b.isbn ?? <span className="italic">assigned during production</span>} · MRP {inr(b.mrp)}
+            {b.genre ?? '—'} · ISBN {b.isbn ?? <span className="italic">assigned during production</span>}
+            {b.mrp > 0 && <> · MRP {inr(b.mrp)}</>}
             {b.publicationDate && <> · Published {date(b.publicationDate)}</>}
           </p>
         </div>
@@ -60,13 +61,23 @@ function BookCard({ book: b }: { book: Book }) {
       </div>
 
       {b.isPublished ? (
-        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-sm md:grid-cols-4">
-          <Field label="Copies sold" value={b.copiesSold.toLocaleString('en-IN')} />
-          <Field label="Royalty earned" value={inr(b.royaltyEarned)} />
-          <Field label="Royalty paid" value={inr(b.royaltyPaid)} />
-          <Field label="Royalty pending" value={inr(b.royaltyPending)}
-            hint={b.belowPayoutThreshold ? 'Below ₹1,000 minimum — rolls over to next quarter' : b.copiesSold === 0 ? 'No sales recorded yet' : undefined} />
-        </div>
+        <>
+          <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-sm md:grid-cols-4">
+            <Field label="Copies sold" value={b.copiesSold.toLocaleString('en-IN')} />
+            <Field label="Royalty earned" value={inr(b.royaltyEarned)} />
+            <Field label="Royalty paid" value={inr(b.royaltyPaid)} />
+            <Field label="Royalty pending" value={inr(b.royaltyPending)}
+              hint={b.belowPayoutThreshold ? 'Below ₹1,000 minimum — rolls over to next quarter' : b.copiesSold === 0 ? 'No sales recorded yet' : undefined} />
+          </div>
+          <p className="mt-3 text-xs text-slate-500">
+            {[
+              b.royaltyPerCopy !== null && `${inr(b.royaltyPerCopy)} royalty per copy`,
+              `Last payout: ${b.lastPayoutDate ? date(b.lastPayoutDate) : 'none yet'}`,
+              b.printPartner && `Printed by ${b.printPartner}`,
+            ].filter(Boolean).join(' · ')}
+          </p>
+          {b.availableOn.length > 0 && <p className="mt-1 text-xs text-slate-500">Available on {b.availableOn.join(', ')}</p>}
+        </>
       ) : (
         <div className="mt-4 border-t border-slate-100 pt-4">
           <div className="flex gap-1" aria-label={`Production stage ${stage + 1} of ${PRODUCTION_STAGES.length}`}>
@@ -75,7 +86,7 @@ function BookCard({ book: b }: { book: Book }) {
             ))}
           </div>
           <p className="mt-2 text-sm text-slate-500">
-            Currently in <strong className="text-slate-700">{b.status}</strong>. Sales and royalty figures will appear once your book is live.
+            Currently in <strong className="text-slate-700">{stage >= 0 ? PRODUCTION_STAGES[stage] : b.status}</strong>. Sales and royalty figures will appear once your book is live.
           </p>
         </div>
       )}
